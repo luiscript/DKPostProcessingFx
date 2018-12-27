@@ -71,6 +71,8 @@ public:
         post.createPass<VerticalTiltShifPass>()->setEnabled(false);
         post.createPass<ZoomBlurPass>()->setEnabled(false);
         
+        addInputConnection(ConnectionType::DK_FBO);
+        addOutputConnection(ConnectionType::DK_FBO);
     };
     void update()
     {
@@ -92,14 +94,6 @@ public:
     {
         gui->addMatrix("FX", 22, true)->onMatrixEvent(this, &DarkKnightPostProcessing::onFxSelected);
     };
-    void drawMasterInput()
-    {
-        drawInputConnection();
-    };
-    void drawMasterOutput()
-    {
-        drawOutputConnection();
-    }
     void setFbo(ofFbo * fboPtr)
     {
         fbo  = fboPtr;
