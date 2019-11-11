@@ -23,10 +23,10 @@
 #ifndef DarkKnightPostProcessing_h
 #define DarkKnightPostProcessing_h
 
-#include "module.hpp"
+#include "DKModule.hpp"
 #include "ofxPostProcessing.h"
 
-class DarkKnightPostProcessing : public Module {
+class DKPostProcessingFx : public DKModule {
     
 private:
     
@@ -71,8 +71,8 @@ public:
         post.createPass<VerticalTiltShifPass>()->setEnabled(false);
         post.createPass<ZoomBlurPass>()->setEnabled(false);
         
-        addInputConnection(ConnectionType::DK_FBO);
-        addOutputConnection(ConnectionType::DK_FBO);
+        addInputConnection(DKConnectionType::DK_FBO);
+        addOutputConnection(DKConnectionType::DK_FBO);
     };
     void update()
     {
@@ -92,7 +92,7 @@ public:
     };
     void addModuleParameters()
     {
-        gui->addMatrix("FX", 22, true)->onMatrixEvent(this, &DarkKnightPostProcessing::onFxSelected);
+        gui->addMatrix("FX", 22, true)->onMatrixEvent(this, &DKPostProcessingFx::onFxSelected);
     };
     void setFbo(ofFbo * fboPtr)
     {
